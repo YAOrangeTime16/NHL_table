@@ -4,7 +4,6 @@
     <Content />
   </div>
 </template>
-
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import Header from './layout/Header.vue';

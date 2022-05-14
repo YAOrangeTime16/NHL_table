@@ -47,26 +47,26 @@ export default class Content extends Vue {
   protected isModalOpen: boolean = false;
   protected modalContent = {};
 
-  protected setBy(value: string) {
+  protected setBy(value: string): void {
     this.$set(this.sort, "by", value);
     this.tableSort();
   }
 
-  protected setDirection(value: string) {
+  protected setDirection(value: string): void {
     this.$set(this.sort, "direction", value);
     this.tableSort();
   }
 
-  protected setScroll(value: string) {
+  protected setScroll(value: string): void {
     this.scrollTo = value;
   }
 
-  protected tableSort() {
+  protected tableSort(): void {
     this.teamByConference[CONFERENCE.WESTERN].sort(this.sorting);
     this.teamByConference[CONFERENCE.EASTERN].sort(this.sorting);
   }
 
-  protected sorting(a, b) {
+  protected sorting(a, b): number {
       let returnValue = 0;
 
       if (this.sort.by === "Standing") {
@@ -97,12 +97,12 @@ export default class Content extends Vue {
     this.teamByConference = listTeamsByCategory(data as DataEntity[]);
   }
 
-  protected openModal(info) {
+  protected openModal(info): void {
     this.modalContent = info;
     this.isModalOpen = true;
   }
 
-  protected closeModal() {
+  protected closeModal(): void {
     this.modalContent = {};
     this.isModalOpen = false;
   }

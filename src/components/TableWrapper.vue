@@ -18,13 +18,11 @@
     </div>
   </section>
 </template>
-
 <script lang="ts">
 import { Component, Prop, Ref, Watch, Vue } from "vue-property-decorator";
 import { CONFERENCE } from "../typings/enums";
 import { ITeamByConference } from "../typings";
 import { TSortSelectOptionsId } from "../typings/types";
-
 import Table from "./Table.vue";
 
 @Component({
@@ -52,7 +50,7 @@ export default class TableWrapper extends Vue {
   protected tableSection: HTMLElement;
 
   @Watch("scrollTo")
-  protected scrollToTable(scrollToName) {
+  protected scrollToTable(scrollToName): void {
     if (scrollToName === "eastern") {
       this.tableSection.scrollTo({
         top: this.easternTable.offsetTop,
@@ -70,7 +68,7 @@ export default class TableWrapper extends Vue {
 
   protected CONFERENCE = CONFERENCE;
 
-  protected modalOpen(content) {
+  protected modalOpen(content): void {
     this.$emit("modal-open", content)
   }
 }

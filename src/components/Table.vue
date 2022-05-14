@@ -34,7 +34,6 @@
     </ul>
   </div>
 </template>
-
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 import { DataEntity } from "../typings";
@@ -48,13 +47,12 @@ export default class Table extends Vue {
   @Prop({required: true})
   protected readonly conference: string;
 
-    @Prop()
+  @Prop()
   protected readonly sortBy: TSortSelectOptionsId;
 
-  protected emitModalOpen(content) {
+  protected emitModalOpen(content): void {
     this.$emit("modal-open", content)
   }
-
 }
 </script>
 <style lang="scss" scoped>

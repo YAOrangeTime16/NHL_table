@@ -69,6 +69,11 @@ interface Stats {
   PPG: number | string;
 }
 
+export interface IToggleHeaderConference {
+  id: TConferenceId;
+  label: string;
+}
+
 export interface ITeamList {
   _meta: Meta;
   _links: Links;

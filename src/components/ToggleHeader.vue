@@ -13,14 +13,14 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-
+import { IToggleHeaderConference } from "../typings";
 
 @Component
 export default class ToggleHeader extends Vue {
 
-  protected activeItem = "western";
+  protected activeItem: string = "western";
 
-  protected readonly conferences = [
+  protected readonly conferences: IToggleHeaderConference[] = [
     {
       id: "western",
       label: "WESTERN"
@@ -31,12 +31,11 @@ export default class ToggleHeader extends Vue {
     }
   ]
 
-  protected onClick(id) {
+  protected onClick(id): void {
     this.activeItem = id;
 
     this.$emit("scroll", id)
   }
-
 }
 </script>
 <style lang="postcss" scoped>

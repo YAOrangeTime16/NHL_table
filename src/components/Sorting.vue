@@ -41,13 +41,12 @@
     </div>
   </div>
 </template>
-
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import SortNumericAscending from "vue-material-design-icons/SortNumericAscending.vue";
 import SortNumericDescending from "vue-material-design-icons/SortNumericDescending.vue"
 import { ISelectInputModel } from "../typings/";
-
+import { TSortDirection } from "../typings/types";
 
 @Component({
   components: {
@@ -56,6 +55,7 @@ import { ISelectInputModel } from "../typings/";
   }
 })
 export default class Sorting extends Vue {
+  protected radioModel: TSortDirection = "asc";
   protected model: ISelectInputModel =
     {
       selected: "Standing",
@@ -108,9 +108,6 @@ export default class Sorting extends Vue {
         }
       ]
     }
-
-  protected radioModel = "asc"
-
 }
 </script>
 <style lang="scss" scoped>
