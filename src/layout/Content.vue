@@ -23,6 +23,7 @@ import TableWrapper from '../components/TableWrapper.vue';
 import { listTeamsByCategory, fetchData } from "../utils/"
 import { DataEntity, ITeamByConference } from "../typings";
 import { CONFERENCE } from "../typings/enums";
+// import { leagueStandings } from "../mock-data";
 
 @Component({
   components: {
@@ -89,6 +90,9 @@ export default class Content extends Vue {
     // Call API endpoint.
     const response = await fetchData();
     const data = response.data;
+
+    // // Mock data.
+    // const {data} = leagueStandings;
 
     this.teamByConference = listTeamsByCategory(data as DataEntity[]);
   }

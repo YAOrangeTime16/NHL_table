@@ -1,13 +1,12 @@
 <template>
-  <div>
-    <h2 v-text="conference.toUpperCase()" class="font-bold"/>
+  <div :class="conference">
+    <h2 v-text="conference.toUpperCase()" class="conference-header"/>
     <ul class="listsyle-none grid grid-cols-1 gap-y-2">
       <li
         v-for="team in list" :key="team.id"
       >
         <div
           class="team font-bold"
-          :class="conference"
         >
           <div class="w-1/12">
             {{team.position}}.
@@ -59,32 +58,42 @@ export default class Table extends Vue {
 }
 </script>
 <style lang="scss" scoped>
+.conference-header {
+  @apply font-bold block py-2 px-4 text-white;
+}
+
 .team {
   @apply border-l-4 border-b border-blue-900 pl-2 flex items-center py-2 transition;
 
 }
 
-.team.western {
-  @apply border-blue-900;
-
+.western {
+  .conference-header,
   .btn-open {
     @apply bg-blue-900;
+  }
 
-    &:hover {
-      @apply bg-blue-700;
-    }
+  .btn-open:hover {
+    @apply bg-blue-700;
+  }
+
+  .team {
+    @apply border-blue-900;
   }
 }
 
-.team.eastern {
-  @apply border-red-900;
-
+.eastern {
+  .conference-header,
   .btn-open {
     @apply bg-red-900;
+  }
 
-    &:hover {
-     @apply bg-red-700;
-    }
+  .btn-open:hover {
+    @apply bg-red-700;
+  }
+
+  .team {
+    @apply border-red-900;
   }
 }
 
