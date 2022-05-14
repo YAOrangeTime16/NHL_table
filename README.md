@@ -15,8 +15,6 @@
 - Show a sortable table for each NHL conference
 - Add some basic information about every team somewhere near the table
 
----
-
 ## Tech tools
 
 - [Vue ver.2 (Vue-cli)](https://cli.vuejs.org/)
@@ -25,8 +23,6 @@
 - Sass
 - [Material Design Icons](https://materialdesignicons.com/)
 - npm
-
----
 
 ## Project setup
 
