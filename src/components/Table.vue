@@ -8,12 +8,12 @@
         <div
           class="team font-bold"
           :class="conference"
-          @click="emitModalOpen(team)"
         >
           <div class="w-1/12">
             {{team.position}}.
           </div>
           <div class="w-11/12">{{team.teamName}}</div>
+          <button class="btn-open" @click="emitModalOpen(team)">info</button>
         </div>
         <div class="grid grid-cols-11 text-center text-xs">
           <div
@@ -21,7 +21,8 @@
             :key="index"
           >
             <div
-              class="border-r border-white bg-gray-300"
+              class="border-r border-white"
+              :class="[key === sortBy ? 'bg-red-200' : 'bg-gray-300']"
             >
               {{key}}
             </div>
@@ -38,14 +39,18 @@
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
 import { DataEntity } from "../typings";
-
+import { TSortSelectOptionsId } from "../typings/types";
 
 @Component
 export default class Table extends Vue {
   @Prop({required: true})
   protected readonly list: (DataEntity)[];
+
   @Prop({required: true})
   protected readonly conference: string;
+
+    @Prop()
+  protected readonly sortBy: TSortSelectOptionsId;
 
   protected emitModalOpen(content) {
     this.$emit("modal-open", content)
@@ -55,18 +60,35 @@ export default class Table extends Vue {
 </script>
 <style lang="scss" scoped>
 .team {
-  @apply border-l-4 border-b border-blue-900 pl-2 flex items-center py-2 cursor-pointer transition;
+  @apply border-l-4 border-b border-blue-900 pl-2 flex items-center py-2 transition;
 
-  &:hover {
-    @apply bg-gray-200;
-  }
 }
 
 .team.western {
   @apply border-blue-900;
+
+  .btn-open {
+    @apply bg-blue-900;
+
+    &:hover {
+      @apply bg-blue-700;
+    }
+  }
 }
 
 .team.eastern {
   @apply border-red-900;
+
+  .btn-open {
+    @apply bg-red-900;
+
+    &:hover {
+     @apply bg-red-700;
+    }
+  }
+}
+
+.btn-open {
+  @apply p-1 text-xs text-white rounded;
 }
 </style>

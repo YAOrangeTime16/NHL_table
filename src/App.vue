@@ -7,8 +7,8 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import Header from './components/layout/Header.vue';
-import Content from './components/layout/Content.vue';
+import Header from './layout/Header.vue';
+import Content from './layout/Content.vue';
 
 @Component({
   components: {
@@ -18,5 +18,8 @@ import Content from './components/layout/Content.vue';
 })
 export default class App extends Vue {}
 </script>
-<style lang="scss">
+<style lang="postcss">
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
 </style>

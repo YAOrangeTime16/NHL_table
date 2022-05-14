@@ -9,17 +9,38 @@
           </header>
 
           <div class="body side">
-            <h3 class="body-header">STANDING</h3>
-            {{ content.position }}
-            <h3 class="body-header">COUNTRY</h3>
-            {{ content.country }}
-            <h3 class="body-header">DIVISION</h3>
-            {{ content.division }}
-          </div>
+            <h3 class="body-header">
+              <span class="header-label">STANDING</span>
+              <span>{{ content.position }}</span>
+            </h3>
 
-            <button class="footer" @click="$emit('close')">
-              Close
-            </button>
+            <h3 class="body-header">
+              <span class="header-label">COUNTRY</span>
+              <span>{{ content.country }}</span>
+            </h3>
+            <h3 class="body-header">
+              <span class="header-label">DIVISION</span>
+              <span>{{ content.division }}</span>
+            </h3>
+            <div class="grid grid-cols-6 text-center text-xs md:grid-cols-11">
+              <div
+                v-for="(points, key, index) in stats"
+                :key="index"
+              >
+                <div
+                  class="border-r border-white bg-gray-300"
+                >
+                  {{key}}
+                </div>
+                <div>
+                  {{points ? points : "-"}}
+                </div>
+              </div>
+            </div>
+          </div>
+          <button class="footer" @click="$emit('close')">
+            Close
+          </button>
         </div>
       </div>
     </div>
@@ -45,6 +66,10 @@ export default class Modal extends Vue {
       division: this.modalContent.group
     };
   }
+
+  get stats() {
+    return this.modalContent.stats;
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -53,7 +78,7 @@ export default class Modal extends Vue {
   z-index: 500;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.8);
   transition: opacity 0.3s ease;
 }
 
@@ -65,7 +90,15 @@ export default class Modal extends Vue {
 }
 
 .container {
-  @apply w-1/2 my-12 bg-white rounded-md my-0 mx-auto shadow transition-all duration-500 overflow-hidden;
+  @apply w-11/12 my-12 bg-white rounded-md my-0 mx-auto shadow transition-all duration-500 overflow-hidden;
+
+  @screen md {
+    @apply w-1/2;
+  }
+
+  @screen lg {
+    @apply w-1/3;
+  }
 }
 
 .header {
@@ -73,10 +106,14 @@ export default class Modal extends Vue {
 }
 
 .body {
-  @apply my-12 px-12;
+  @apply my-8 px-12;
 
   .body-header {
-    @apply font-bold;
+    @apply border-b border-gray-300 mb-4;
+  }
+
+  .header-label {
+    @apply font-bold mr-2;
   }
 }
 

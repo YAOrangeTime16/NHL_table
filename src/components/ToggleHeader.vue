@@ -1,10 +1,10 @@
 <template>
-  <ul class="listsyle-none grid grid-cols-2 text-center">
+  <ul class="listsyle-none grid grid-cols-2 text-center bg-white">
     <li
       v-for="conference in conferences" :key="conference.id"
       class="item"
       :class="{active: conference.id === activeItem}"
-      @click="activeItem = conference.id"
+      @click="onClick(conference.id)"
     >
       {{conference.label}}
     </li>
@@ -18,24 +18,30 @@ import { Component, Vue } from 'vue-property-decorator';
 @Component
 export default class ToggleHeader extends Vue {
 
-  protected activeItem = "stats";
+  protected activeItem = "western";
 
   protected readonly conferences = [
     {
-      id: "stats",
-      label: "STATS"
+      id: "western",
+      label: "WESTERN"
     },
     {
-      id: "team",
-      label: "TEAMS"
+      id: "eastern",
+      label: "EASTERN"
     }
   ]
+
+  protected onClick(id) {
+    this.activeItem = id;
+
+    this.$emit("scroll", id)
+  }
 
 }
 </script>
 <style lang="postcss" scoped>
 .item {
-    @apply text-xl border-b-4 border-gray-300 py-4 cursor-pointer transition-colors duration-500;
+    @apply text-xl border-b-8 border-gray-300 py-2 mt-2 cursor-pointer transition-colors duration-500;
 }
 
 .item.active {

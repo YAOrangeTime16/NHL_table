@@ -1,6 +1,6 @@
 <template>
   <header class="bg-black text-white p-4">
-    NHL
+    NHL Sorting Table
   </header>
 </template>
 

@@ -56,17 +56,17 @@ interface Country {
   _links?: (string)[] | null;
 }
 interface Stats {
-  GP: number;
-  W: number;
-  L: number;
+  GP: number | string;
+  W: number | string;
+  L: number | string;
   T?: null;
-  OTW: number;
-  OTL: number;
-  PTS: number;
-  GF: number;
-  GA: number;
-  GD: number;
-  PPG: number;
+  OTW: number | string;
+  OTL: number | string;
+  PTS: number | string;
+  GF: number | string;
+  GA: number | string;
+  GD: number | string;
+  PPG: number | string;
 }
 
 export interface ITeamList {
@@ -75,8 +75,24 @@ export interface ITeamList {
   data?: (DataEntity)[] | null;
 }
 
-
 export interface ITeamByConference {
   western: (DataEntity)[];
   eastern: (DataEntity)[];
+}
+
+export interface ISortEntity {
+  by: TSortSelectOptionsId;
+  direction: TSortDirection;
+}
+
+export interface ISelectInputModel {
+  selected: string;
+  fieldLabel: string;
+  fieldId: string;
+  options: ISelectOptionsModel[];
+}
+
+export interface ISelectOptionsModel {
+    id: TSortSelectOptionsId;
+    label: string;
 }

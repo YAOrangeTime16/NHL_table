@@ -1,23 +1,31 @@
 <template>
-  <section class="table-section">
-    <div class="conference-wrapper">
-      <div class="table-wrapper">
-        <Table :conference="CONFERENCE.WESTERN" :list="teamByConference.western" @modal-open="modalOpen"/>
-      </div>
+  <section class="table-section" ref="tableSection">
+    <div class="table" ref="westernTable">
+      <Table
+        :conference="CONFERENCE.WESTERN"
+        :list="teamByConference.western"
+        :sort-by="sortBy"
+        @modal-open="modalOpen"
+      />
     </div>
-    <div class="conference-wrapper">
-      <div class="table-wrapper">
-        <Table :conference="CONFERENCE.EASTERN" :list="teamByConference.eastern" @modal-open="modalOpen"/>
-      </div>
+    <div class="table" ref="easternTable">
+      <Table
+        :conference="CONFERENCE.EASTERN"
+        :list="teamByConference.eastern"
+        :sort-by="sortBy"
+        @modal-open="modalOpen"
+      />
     </div>
   </section>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from "vue-property-decorator";
-import { ITeamByConference } from "../typings";
-import Table from "./Table.vue";
+import { Component, Prop, Ref, Watch, Vue } from "vue-property-decorator";
 import { CONFERENCE } from "../typings/enums";
+import { ITeamByConference } from "../typings";
+import { TSortSelectOptionsId } from "../typings/types";
+
+import Table from "./Table.vue";
 
 @Component({
   components: {
@@ -27,6 +35,38 @@ import { CONFERENCE } from "../typings/enums";
 export default class TableWrapper extends Vue {
   @Prop()
   protected readonly teamByConference: ITeamByConference;
+
+  @Prop()
+  protected readonly sortBy: TSortSelectOptionsId;
+
+  @Prop()
+  protected readonly scrollTo: string;
+
+  @Ref()
+  protected easternTable: HTMLElement;
+
+  @Ref()
+  protected westernTable: HTMLElement;
+
+  @Ref()
+  protected tableSection: HTMLElement;
+
+  @Watch("scrollTo")
+  protected scrollToTable(scrollToName) {
+    if (scrollToName === "eastern") {
+      this.tableSection.scrollTo({
+        top: this.easternTable.offsetTop,
+        left: this.easternTable.offsetLeft + 8,
+        behavior: "smooth"
+      });
+    } else {
+      this.tableSection.scrollTo({
+        top: this.westernTable.offsetTop,
+        left: 0,
+        behavior: "smooth"
+      });
+    }
+  }
 
   protected CONFERENCE = CONFERENCE;
 
@@ -39,22 +79,20 @@ export default class TableWrapper extends Vue {
 .table-section {
   scroll-snap-type: x mandatory;
 
-  @apply flex flex-row flex-nowrap overflow-x-scroll;
+  @apply flex overflow-x-scroll;
 
-  @screen sm {
-    @apply grid grid-cols-2 gap-4;
+  @screen md {
+    @apply justify-center;
   }
 }
 
-.conference-wrapper {
-  @apply flex flex-col mr-2;
+.table {
+  @apply flex flex-col mr-2 my-4;
   flex: 0 0 auto;
+  scroll-snap-align: start;
 
-  @screen sm {
-    @apply mr-0;
+  @screen md {
+    @apply flex-auto;
   }
-}
-.table-wrapper {
-  @apply flex flex-col;
 }
 </style>
