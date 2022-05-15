@@ -1,4 +1,4 @@
-import type { ITeamByConference, DataEntity } from "../typings";
+import type { ITeamByConference, ITeamList, DataEntity } from "../typings";
 
 export const listTeamsByCategory = (teamlist: DataEntity[]): ITeamByConference => {
   const teamByConference: ITeamByConference
@@ -25,8 +25,9 @@ export const listTeamsByCategory = (teamlist: DataEntity[]): ITeamByConference =
   return teamByConference;
 }
 
-export const fetchData = async (): Promise<any> => {
+export const fetchData = async (): Promise<ITeamList> => {
   const endpoint = `https://api.eliteprospects.com/v1/leagues/nhl/standings?offset=0&limit=50&sort=position&apiKey=${process.env.VUE_APP_API_KEY}`;
   const res = await fetch(endpoint);
+
   return res.json();
 }
