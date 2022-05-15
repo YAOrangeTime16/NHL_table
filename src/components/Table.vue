@@ -12,7 +12,14 @@
             {{team.position}}.
           </div>
           <div class="w-11/12">{{team.teamName}}</div>
-          <button class="btn-open" @click="emitModalOpen(team)">info</button>
+          <button
+            class="btn-open"
+            title="team information"
+            aria-label="team information"
+            @click="emitModalOpen(team)"
+          >
+            <Information />
+          </button>
         </div>
         <div class="grid grid-cols-11 text-center text-xs">
           <div
@@ -36,10 +43,15 @@
 </template>
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
+import Information from "vue-material-design-icons/Information.vue";
 import { DataEntity } from "../typings";
 import { TSortSelectOptionsId } from "../typings/types";
 
-@Component
+@Component({
+  components: {
+    Information
+  }
+})
 export default class Table extends Vue {
   @Prop({required: true})
   protected readonly list: (DataEntity)[];
@@ -66,13 +78,16 @@ export default class Table extends Vue {
 }
 
 .western {
-  .conference-header,
-  .btn-open {
+  .conference-header {
     @apply bg-blue-900;
   }
 
-  .btn-open:hover {
-    @apply bg-blue-700;
+  .btn-open {
+    @apply text-blue-900;
+
+    :hover {
+      @apply text-blue-700;
+    }
   }
 
   .team {
@@ -81,13 +96,16 @@ export default class Table extends Vue {
 }
 
 .eastern {
-  .conference-header,
-  .btn-open {
+  .conference-header {
     @apply bg-red-900;
   }
 
-  .btn-open:hover {
-    @apply bg-red-700;
+  .btn-open {
+    @apply text-red-900;
+
+    &:hover {
+      @apply text-red-700;
+    }
   }
 
   .team {

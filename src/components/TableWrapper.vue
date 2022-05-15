@@ -85,7 +85,7 @@ export default class TableWrapper extends Vue {
 }
 
 .table {
-  @apply flex flex-col mr-2 my-4;
+  @apply flex flex-col mr-2 mb-4;
   flex: 0 0 auto;
   scroll-snap-align: start;
 

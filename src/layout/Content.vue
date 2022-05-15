@@ -103,8 +103,8 @@ export default class Content extends Vue {
   }
 
   protected closeModal(): void {
-    this.modalContent = {};
     this.isModalOpen = false;
+    this.modalContent = {};
   }
 }
 </script>

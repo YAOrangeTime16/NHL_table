@@ -73,18 +73,12 @@ export default class Modal extends Vue {
 </script>
 <style lang="scss" scoped>
 .mask {
-  @apply fixed w-full h-full;
+  @apply fixed w-full h-full top-0 left-0 bg-black opacity-80 transition-opacity duration-300;
   z-index: 500;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.8);
-  transition: opacity 0.3s ease;
 }
 
 .wrapper {
-  @apply fixed w-full;
-  top: 0;
-  left: 0;
+  @apply fixed w-full top-0 left-0;
   z-index:1000;
 }
 
@@ -125,11 +119,11 @@ export default class Modal extends Vue {
 }
 
 .enter {
-  opacity: 0;
+  @apply opacity-0;
 }
 
 .leave-active {
-  opacity: 0;
+  @apply opacity-0;
 }
 
 .enter .container,
