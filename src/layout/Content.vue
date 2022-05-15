@@ -77,9 +77,9 @@ export default class Content extends Vue {
         }
       } else {
         if (this.sort.direction === "asc") {
-          returnValue = a.stats[this.sort.by] > b.stats[this.sort.by] ? -1 : 1;
-        } else {
           returnValue = a.stats[this.sort.by] > b.stats[this.sort.by] ? 1 : -1;
+        } else {
+          returnValue = a.stats[this.sort.by] > b.stats[this.sort.by] ? -1 : 1;
         }
       }
 
